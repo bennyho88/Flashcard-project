@@ -51,6 +51,8 @@ function eventListeners() {
 
             data.push(question);
             id++;
+            ui.addQuestion(questionList, question);
+            ui.clearFields(questionInput, answerInput);
             
         }
 
@@ -75,6 +77,33 @@ UI.prototype.showQuestion = function (element) {
 UI.prototype.hideQuestion = function (element) {
 
     element.classList.remove('showItem');
+};
+
+// add question
+UI.prototype.addQuestion = function(element, question) {
+
+    const div = document.createElement('div');
+    div.classList.add('col-md-4');
+    div.innerHTML = `
+    <div class="card card-body flashcard my-3">
+    <h4 class="text-capitalize">${question.title}</h4>
+    <a href="#" class="text-capitalize my-3 show-answer">show/hide answer</a>
+    <h5 class="answer mb-3">${question.answer}</h5>
+    <div class="flashcard-btn d-flex justify-content-between">
+
+     <a href="#" id="edit-flashcard" class=" btn my-1 edit-flashcard text-uppercase" data-id="${question.id}">edit</a>
+     <a href="#" id="delete-flashcard" class=" btn my-1 delete-flashcard text-uppercase">delete</a>
+    </div>
+   </div>
+    `
+    element.appendChild(div);
+}
+
+// clear fields
+UI.prototype.clearFields = function (question, answer) {
+
+    question.value = '';
+    answer.value = '';
 }
 
 // question constructor
@@ -90,8 +119,6 @@ function Question(id, title, answer) {
 document.addEventListener('DOMContentLoaded', function () {
     eventListeners();
 })
-
-
 
 
 
