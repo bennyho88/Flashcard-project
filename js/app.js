@@ -57,6 +57,7 @@ function eventListeners() {
         }
 
     });
+    
     // work with a question
     questionList.addEventListener('click', function(event) {
 
@@ -111,15 +112,6 @@ function eventListeners() {
             answerInput.value = tempQuestion[0].answer;
         }
         
-        
-        /*
-        else if (event.target.classList.contains('edit-flashcard')) {
-            questionList.removeChild(event.target.parentElement.parentElement.parentElement);
-            ui.addValues(questionInput, answerInput);
-        } else if (event.target.classList.contains('show-answer')) {
-            console.log('hello show/hide')
-        }
-        */
    })
 
 }
@@ -170,13 +162,6 @@ UI.prototype.clearFields = function (question, answer) {
     answer.value = '';
 }
 
-UI.prototype.addValues = function(questionInput, answerInput) {
-
-    questionInput = question;
-    answerInput = answer;
-}
-
-
 // question constructor
 function Question(id, title, answer) {
 
@@ -195,140 +180,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-showBtn.addEventListener('click', function() {
-
-    questionCard.classList.add('showItem');
-})
-
-closeBtn.addEventListener('click', function() {
-    questionCard.classList.remove('showItem');
-})
-
-form.addEventListener('submit', function(event) {
-
-    event.preventDefault();
-
-    const question = document.getElementById('question-input');
-    const answer = document.getElementById('answer-input');
-
-
-    const information = new Information(question.value, answer.value);
-    console.log(information);
-    const flashcard =  new Flashcard();
-
-    flashcard.validateField(information);
-
-
-})
-
-document.getElementById('delete-flashcard').addEventListener('click', function(event) {
-
-    const cards = document.querySelectorAll('.flashcard');
-
-    console.log(cards);
-
-    cards.forEach(card => {
-
-        card.style.display = 'none';
-    })
-
-})
-
-function Flashcard() {
-
-    this.question = document.getElementById('question-input');
-    this.answer = document.getElementById('answer-input');
-    this.questionList = document.getElementById("questions-list");
-}
-
-Flashcard.prototype.validateField = function(information) {
-
-    const feedback = document.querySelector(".feedback");
-
-    if(this.question.value === '' && this.answer.value === '') {
-        feedback.classList.add('showItem', 'alert', 'alert-danger');
-        feedback.innerHTML = `<p>Cannot Add Empty Values</p>`
-    } else {
-        this.addFlashCard(information);
-    }
-
-    setTimeout(function() {
-        feedback.classList.remove('showItem', 'alert', 'alert-danger');
-    }, 4000)
-
-}
-
-Flashcard.prototype.addFlashCard = function(information) {
-
-    const div = document.createElement('div');
-    div.classList.add('col-md-4');
-    div.innerHTML = `
-    <div class="card card-body flashcard my-3">
-    <h4 class="text-capitalize">${information.question}</h4>
-    <a href="#" class="text-capitalize my-3 show-answer">show/hide answer</a>
-    <h5 class="answer mb-3">${information.answer}</h5>
-    <div class="flashcard-btn d-flex justify-content-between">
-
-     <a href="#" id="edit-flashcard" class=" btn my-1 edit-flashcard text-uppercase" data-id="">edit</a>
-     <a href="#" id="delete-flashcard" class=" btn my-1 delete-flashcard text-uppercase">delete</a>
-    </div>
-   </div>
-    `
-
-    this.questionList.appendChild(div);
-}
-
-function Information(question, answer) {
-
-    this.question = question;
-    this.answer = answer;
-}
-*/
