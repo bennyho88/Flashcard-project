@@ -56,7 +56,71 @@ function eventListeners() {
             
         }
 
-    })
+    });
+    // work with a question
+    questionList.addEventListener('click', function(event) {
+
+        event.preventDefault();
+        // console.log(event.target.parentElement.parentElement)
+        if(event.target.classList.contains('delete-flashcard')) {
+            
+            
+            let id = event.target.dataset.id
+            
+            questionList.removeChild(event.target.parentElement.parentElement.parentElement);
+
+            // rest of the data
+            console.log(data);
+            let tempData = data.filter(function(item) {
+                return item.id !== parseInt(id);
+            });
+
+            data = tempData;
+            console.log(data);
+        } else if (event.target.classList.contains('show-answer')) {
+            event.target.nextElementSibling.classList.toggle('showItem');
+            console.log(event.target.nextElementSibling)
+        } else if (event.target.classList.contains('edit-flashcard')) {
+            // delete question
+
+            let id = event.target.dataset.id
+
+            // delete question from the dom
+
+            questionList.removeChild(event.target.parentElement.parentElement.parentElement);
+
+            // show the question card
+            ui.showQuestion(questionCard);
+
+            // specific question
+
+            const tempQuestion = data.filter(function(item) {
+                return item.id === parseInt(id);
+            })
+
+            // rest of the data
+
+            let tempData = data.filter(function(item) {
+                return item.id !== parseInt(id);
+            })
+
+            console.log(data);
+            data = tempData;
+            console.log(data);
+            questionInput.value = tempQuestion[0].title;
+            answerInput.value = tempQuestion[0].answer;
+        }
+        
+        
+        /*
+        else if (event.target.classList.contains('edit-flashcard')) {
+            questionList.removeChild(event.target.parentElement.parentElement.parentElement);
+            ui.addValues(questionInput, answerInput);
+        } else if (event.target.classList.contains('show-answer')) {
+            console.log('hello show/hide')
+        }
+        */
+   })
 
 }
 
@@ -92,7 +156,7 @@ UI.prototype.addQuestion = function(element, question) {
     <div class="flashcard-btn d-flex justify-content-between">
 
      <a href="#" id="edit-flashcard" class=" btn my-1 edit-flashcard text-uppercase" data-id="${question.id}">edit</a>
-     <a href="#" id="delete-flashcard" class=" btn my-1 delete-flashcard text-uppercase">delete</a>
+     <a href="#" id="delete-flashcard" class=" btn my-1 delete-flashcard text-uppercase" data-id="${question.id}">delete</a>
     </div>
    </div>
     `
@@ -105,6 +169,13 @@ UI.prototype.clearFields = function (question, answer) {
     question.value = '';
     answer.value = '';
 }
+
+UI.prototype.addValues = function(questionInput, answerInput) {
+
+    questionInput = question;
+    answerInput = answer;
+}
+
 
 // question constructor
 function Question(id, title, answer) {
@@ -119,12 +190,6 @@ function Question(id, title, answer) {
 document.addEventListener('DOMContentLoaded', function () {
     eventListeners();
 })
-
-
-
-
-
-
 
 
 
